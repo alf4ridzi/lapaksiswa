@@ -76,7 +76,7 @@
             <button type="submit" class="btn">Register</button>
         </form>
         <div class="text-center mt-4">
-            <a href="register" class="text-blue-500 hover:underline text-sm">Sudah punya akun ? Login</a>
+            <a href="login" class="text-blue-500 hover:underline text-sm">Sudah punya akun ? Login</a>
         </div>
     </div>
 </div>

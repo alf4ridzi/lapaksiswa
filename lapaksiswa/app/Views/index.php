@@ -106,7 +106,7 @@
                                     <?= number_format($p['harga'], 2, ',', '.') ?>
                                 </p>
                                 <p class="text-sm font-semibold"><?= esc($p['nama_toko']) ?></p>
-                                <p class="text-sm">5.0 | <?= esc($p['terjual']) ?> Terjual</p>
+                                <p class="text-sm">⭐ 5.0 | <?= esc($p['terjual']) ?> Terjual</p>
                             </div>
                         </div>
                     </a>

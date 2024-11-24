@@ -62,7 +62,7 @@
             <button type="submit" class="btn">Login</button>
         </form>
         <div class="text-center mt-4">
-            <a href="register" class="text-blue-500 hover:underline text-sm">Don't have an account? Register</a>
+            <a href="register" class="text-blue-500 hover:underline text-sm">Tidak Punya Akun? Daftar Sekarang</a>
         </div>
     </div>
 </div>
