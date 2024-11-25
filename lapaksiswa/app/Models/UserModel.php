@@ -34,7 +34,7 @@ class UserModel extends Model {
 
     }
 
-    public function register($data) {
-        $this->insert($data);
+    public function tambahData($data) {
+        $this->save($data);
     }
 }

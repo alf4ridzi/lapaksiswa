@@ -103,19 +103,25 @@ class Autentikasi extends BaseController
         $data['password'] = htmlspecialchars($data['password'], ENT_QUOTES, 'UTF-8');
         $data['confirmpassword'] = htmlspecialchars($data['confirmpassword'], ENT_QUOTES, 'UTF-8');
         
-        if (empty($data['username']) || empty($data['email']) || empty($data['nomorhp']) || empty($data['password']) || empty($data['confirmpassword'])) {
-            $this->session->setFlashdata('error', 'Mohon Lengkapi Data!');
-            return redirect()->to('register');
-        }
+        $rules = [
+            'username' => 'required|max_length[30]',
+            'email' => 'required|max_length[255]|valid_email',
+            'nomorhp' => 'required|max_length[50]',
+            'password' => 'required|max_length[255]',
+            'confirmpassword' => 'required|max_length[255]|matches[password]'
+        ];
 
-        if ($data['password'] !== $data['confirmpassword']) {
-            $this->session->setFlashdata('error', 'Password tidak sama!');
+
+        if (!$this->validate($rules, $data)) {
+            $this->session->setFlashdata('error', $this->validator->listErrors());
             return redirect()->to('register');
         }
 
         $userModel = new UserModel();
-        $userModel->register($data);
+        $userModel->tambahData($data);
 
+        $this->session->setFlashdata('sukses', 'Register Berhasil! Silahkan Login');
         
+        return redirect()->to('login');
     }
 }
