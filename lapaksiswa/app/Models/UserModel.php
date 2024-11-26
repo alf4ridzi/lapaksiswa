@@ -23,8 +23,8 @@ class UserModel extends Model {
         'last_online'
     ];
 
-    public function validasiUserLogin($username, $password) {
-        $user = $this->where('username', $username)->first();
+    public function validasiUserLogin($login, $password, $loginTipe) {
+        $user = $this->where($loginTipe, $login)->first();
 
         if (!$user) {
             return false;
@@ -36,5 +36,36 @@ class UserModel extends Model {
 
     public function tambahData($data) {
         $this->save($data);
+    }
+
+    public function cekData($username, $email, $nomorhp) {
+        $cekUser = $this->where('username', $username)->first();
+        if ($cekUser) {
+            return [
+                'status' => false,
+                'msg' => 'Username sudah digunakan!'
+            ];
+        }
+
+        $cekEmail = $this->where('email', $email)->first();
+        if ($cekEmail) {
+            return [
+                'status' => false,
+                'msg' => 'Email sudah digunakan!'
+            ];
+        }
+
+        $cekNomorHP = $this->where('no_hp', $nomorhp)->first();
+        if ($cekNomorHP) {
+            return [
+                'status' => false,
+                'msg' => 'Nomor HP sudah digunakan!'
+            ];
+        }
+
+        return [
+            'status' => true,
+            'msg' => ''
+        ];
     }
 }

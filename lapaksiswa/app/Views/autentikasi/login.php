@@ -37,23 +37,37 @@
     .btn:hover {
         background-color: #2563EB;
     }
+
+    
+
 </style>
 
 <div class="login-container">
     <div class="login-box">
         <h2 class="text-xl font-bold mb-6 text-center">Login Ke LAPAK SISWA</h2>
-        <form method="POST" action="login/submit">
+        <?php if (session()->get('error')): ?>
+            <div id="alert" class="alert error">
+                <?= session()->get('error'); ?>
+            </div>
+        <?php elseif (session()->get('sukses')): ?>
+            <div id="alert" class="alert sukses">
+                <?= session()->get('sukses') ?>
+            </div>
+        <?php endif; ?>
+        
+        <form method="POST" action="auth/login">
             <div class="mb-4">
-                <label for="email" class="block text-sm font-semibold">Email</label>
-                <input type="email" id="email" name="email"
-                    class="input-field px-4 py-2 border border-gray-300 rounded-md w-full"
-                    placeholder="Masukkan Email" required>
+                <label for="login" class="block text-sm font-semibold">Username/Email</label>
+                <input type="login" id="login" name="login"
+                    class="input-field px-4 py-2 border border-gray-300 rounded-md w-full" placeholder="Masukkan Email"
+                    required>
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-sm font-semibold">Password</label>
                 <input type="password" id="password" name="password"
                     class="input-field px-4 py-2 border border-gray-300 rounded-md w-full"
                     placeholder="Masukkan Password" required>
+                    
             </div>
             <div class="mb-4 flex items-center">
                 <input type="checkbox" id="remember" name="remember" class="mr-2">

@@ -37,17 +37,33 @@
     .btn:hover {
         background-color: #2563EB;
     }
+    
 </style>
 
 <div class="register-container">
     <div class="register-box">
         <h2 class="text-xl font-bold mb-6 text-center">Register Ke LAPAK SISWA</h2>
-        <form method="POST" action="login/submit">
+        <?php if (session()->get('error')): ?>
+            <div id="alert" class="alert error">
+                <?= session()->get('error'); ?>
+            </div>
+        <?php elseif (session()->get('sukses')): ?>
+            <div id="alert" class="alert sukses">
+                <?= session()->get('sukses') ?>
+            </div>
+        <?php endif; ?>
+        <form method="POST" action="auth/register">
             <div class="mb-4">
                 <label for="username" class="block text-sm font-semibold">Username</label>
                 <input type="text" id="username" name="username"
                     class="input-field px-4 py-2 border border-gray-300 rounded-md w-full"
                     placeholder="Masukkan username" required>
+            </div>
+            <div class="mb-4">
+                <label for="nama" class="block text-sm font-semibold">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama"
+                    class="input-field px-4 py-2 border border-gray-300 rounded-md w-full"
+                    placeholder="Masukkan nama lengkap" required>
             </div>
             <div class="mb-4">
                 <label for="email" class="block text-sm font-semibold">Email</label>
@@ -56,8 +72,8 @@
                     placeholder="Masukkan email" required>
             </div>
             <div class="mb-4">
-                <label for="nomorhp" class="block text-sm font-semibold">Nomor HP/WA</label>
-                <input type="number" id="nomorhp" name="nomorhp"
+                <label for="no_hp" class="block text-sm font-semibold">Nomor HP/WA</label>
+                <input type="number" id="no_hp" name="no_hp"
                     class="input-field px-4 py-2 border border-gray-300 rounded-md w-full"
                     placeholder="Masukkan Nomor HP" required>
             </div>

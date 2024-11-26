@@ -13,6 +13,7 @@ $routes->group('', ['namespace' => 'App\Controllers\Autentikasi'], function($rou
     $routes->get('login', 'Autentikasi::login');
     $routes->get('register', 'Autentikasi::register');
     $routes->post('auth/login', 'Autentikasi::validasiMasuk');
-    $routes->post('auth/register', 'Autentikasi::validasiRegister');
+    $routes->post('auth/register', 'Autentikasi::prosesRegister');
+    $routes->get('keluar', 'Autentikasi::keluar');
 });
  

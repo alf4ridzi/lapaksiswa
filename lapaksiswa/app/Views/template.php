@@ -43,20 +43,42 @@
     #dropdown {
         z-index: 9999;
     }
+
+    .alert {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        color: white;
+        border-radius: 5px;
+        margin: 10px 0;
+        font-size: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .alert.error {
+        background-color: #e74c3c;
+    }
+
+    .alert.sukses {
+        background-color: #2ecc71;
+    }
 </style>
 
 <body class="flex flex-col min-h-screen">
-    <nav class="bg-blue-500 py-3">
+    <nav class="bg-white-500 py-3">
         <div class="container mx-auto flex flex-wrap items-center justify-between">
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-3 ml-4">
                 <img src="<?= $web['web_logo'] ?>" alt="Logo" class="h-10 w-10">
-                <a href="/" class="text-white text-xl font-bold">Lapak Siswa</a>
+                <a href="/" class="text-blue-500 text-xl font-bold">Lapak Siswa</a>
             </div>
+
 
             <div class="flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 md:space-x-3 w-full md:w-2/5">
                 <div class="relative">
                     <button onclick="toggleDropdown()"
-                        class="font-semibold text-white bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700">
+                        class="font-semibold text-black px-4 py-2 rounded-md">
                         Kategori
                     </button>
                     <div id="dropdown" class="hidden absolute bg-white shadow-md rounded-md mt-2 w-64">
@@ -76,16 +98,30 @@
                         class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
                 </div>
             </div>
-
-            <div class="flex space-x-2 mt-3 md:mt-0">
-                <a href="login" class="px-4 py-2 bg-white text-blue-500 font-semibold rounded-md hover:bg-gray-100">
-                    Login
-                </a>
-                <a href="register"
-                    class="px-4 py-2 border border-white text-white font-semibold rounded-md hover:bg-blue-400">
-                    Register
-                </a>
-            </div>
+            <?php if (!session()->get('isLogin')): ?>
+                <div class="flex space-x-2 mt-3 md:mt-0">
+                    <a href="login" class="px-4 py-2 bg-blue-700 text-blue-500 font-semibold rounded-md">
+                        Login
+                    </a>
+                    <a href="register"
+                        class="px-4 py-2 border border-blue-500 text-blue-500 font-semibold rounded-md hover:bg-blue-400">
+                        Register
+                    </a>
+                </div>
+            <?php else: ?>
+                <div class="flex space-x-2 mt-3 md:mt-0">
+                    <a href="dashboard"
+                        class="px-4 py-2 bg-white text-blue-500 font-semibold rounded-md hover:bg-gray-100 flex items-center space-x-2">
+                        <i class="fas fa-user"></i>
+                        <span><?php echo session()->get('username') ?></span>
+                    </a>
+                    <a href="keluar"
+                        class="px-4 py-2 bg-white text-blue-500 font-semibold rounded-md hover:bg-gray-100 flex items-center space-x-2">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </a>
+                </div>
+            
+        <?php endif; ?>
         </div>
     </nav>
 

@@ -17,6 +17,7 @@ class Autentikasi extends BaseController
     public function login(): string
     {
 
+    
         $websiteModel = new WebsiteModel();
         $web = $websiteModel->getSettings();
 
@@ -62,15 +63,21 @@ class Autentikasi extends BaseController
         }
 
         $userModel = new UserModel();
-        $username = htmlspecialchars($this->request->getPost('username'), ENT_QUOTES, 'UTF-8');
+        $login = htmlspecialchars($this->request->getPost('login'), ENT_QUOTES, 'UTF-8');
         $password = htmlspecialchars($this->request->getPost('password'), ENT_QUOTES, 'UTF-8');
 
-        if (!$userModel->validasiUserLogin($username, $password)) {
-            $this->session->setFlashdata('error', 'Username/Password Salah.');
-            return redirect()->to('masuk');
+        $loginTipe = 'username';
+
+        if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            $loginTipe = 'email';
         }
 
-        $user = $userModel->where('username', $username)->first();
+        if (!$userModel->validasiUserLogin($login, $password, $loginTipe)) {
+            $this->session->setFlashdata('error', ucfirst($loginTipe) . '/Password Salah.');
+            return redirect()->to('login');
+        }
+
+        $user = $userModel->where($loginTipe, $login)->first();
 
         $sessLogin = [
             'isLogin' => true,
@@ -99,15 +106,15 @@ class Autentikasi extends BaseController
 
         $data['username'] = htmlspecialchars($data['username'], ENT_QUOTES, 'UTF-8');
         $data['email'] = htmlspecialchars($data['email'], ENT_QUOTES, 'UTF-8');
-        $data['nomorhp'] = htmlspecialchars($data['nomorhp'], ENT_QUOTES, 'UTF-8');
+        $data['no_hp'] = htmlspecialchars($data['no_hp'], ENT_QUOTES, 'UTF-8');
         $data['password'] = htmlspecialchars($data['password'], ENT_QUOTES, 'UTF-8');
         $data['confirmpassword'] = htmlspecialchars($data['confirmpassword'], ENT_QUOTES, 'UTF-8');
         
         $rules = [
             'username' => 'required|max_length[30]',
             'email' => 'required|max_length[255]|valid_email',
-            'nomorhp' => 'required|max_length[50]',
-            'password' => 'required|max_length[255]',
+            'no_hp' => 'required|max_length[50]',
+            'password' => 'required|max_length[255]|min_length[8]',
             'confirmpassword' => 'required|max_length[255]|matches[password]'
         ];
 
@@ -117,11 +124,34 @@ class Autentikasi extends BaseController
             return redirect()->to('register');
         }
 
+        // cek apakah email, username, nomorhp sudah ada
         $userModel = new UserModel();
+        $cekAkun = $userModel->cekData($data['username'], $data['email'], $data['no_hp']);
+
+        if (!$cekAkun['status']) {
+            $this->session->setFlashdata('error', $cekAkun['msg']);
+            return redirect()->to('register');
+        }
+        
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        
         $userModel->tambahData($data);
 
         $this->session->setFlashdata('sukses', 'Register Berhasil! Silahkan Login');
         
         return redirect()->to('login');
+    }
+
+    public function keluar() {
+        $sessData = [
+            'isLogin',
+            'role',
+            'username',
+            'nama'
+        ];
+
+        $this->session->remove($sessData);
+        
+        return redirect()->to('/');
     }
 }
