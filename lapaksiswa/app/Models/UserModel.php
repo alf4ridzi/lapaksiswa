@@ -23,6 +23,12 @@ class UserModel extends Model {
         'last_online'
     ];
 
+    public function getDataUser(string $username) {
+        $data = $this->where('username', $username)->first();
+
+        return $data;
+    }
+
     public function validasiUserLogin($login, $password, $loginTipe) {
         $user = $this->where($loginTipe, $login)->first();
 

@@ -16,4 +16,8 @@ $routes->group('', ['namespace' => 'App\Controllers\Autentikasi'], function($rou
     $routes->post('auth/register', 'Autentikasi::prosesRegister');
     $routes->get('keluar', 'Autentikasi::keluar');
 });
+
+$routes->group('user', ['namespace' => 'App\Controllers\User'], function($routes) {
+    $routes->get('/', 'View::dashboard');
+});
  

@@ -6,6 +6,7 @@ use App\Models\WebsiteModel;
 use App\Models\KategoriModel;
 use App\Models\UserModel;
 use CodeIgniter\CodeIgniter;
+use App\Models\PembayaranModel;
 
 class Autentikasi extends BaseController
 {
@@ -24,9 +25,13 @@ class Autentikasi extends BaseController
         $kategoriModel = new KategoriModel();
         $kategori = $kategoriModel->getKategori();
 
+        $pembayaranModel = new PembayaranModel();
+        $pembayaran = $pembayaranModel->getMetode();
+
         $data = [
             'web' => $web,
-            'kategori' => $kategori
+            'kategori' => $kategori,
+            'pembayaran' => $pembayaran
         ];
 
         return view('autentikasi/login', $data);
@@ -40,9 +45,13 @@ class Autentikasi extends BaseController
         $kategoriModel = new KategoriModel();
         $kategori = $kategoriModel->getKategori();
 
+        $pembayaranModel = new PembayaranModel();
+        $pembayaran = $pembayaranModel->getMetode();
+        
         $data = [
             'web' => $web,
-            'kategori' => $kategori
+            'kategori' => $kategori,
+            'pembayaran' => $pembayaran
         ];
 
         return view('autentikasi/register', $data);
@@ -59,7 +68,7 @@ class Autentikasi extends BaseController
                 return redirect()->to('seller');
             }
 
-            return redirect()->to('/');
+            return redirect()->to('user');
         }
 
         $userModel = new UserModel();
@@ -93,7 +102,7 @@ class Autentikasi extends BaseController
             return redirect()->to('seller');
         }
 
-        return redirect()->to('/');
+        return redirect()->to('user');
 
     }
 

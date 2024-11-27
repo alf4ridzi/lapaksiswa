@@ -1,15 +1,27 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\User;
+use App\Controllers\BaseController;
 use App\Models\WebsiteModel;
 use App\Models\KategoriModel;
 use App\Models\ProdukModel;
 use App\Models\PembayaranModel;
+use App\Models\UserModel;
 
 class View extends BaseController
 {
-    public function index(): string
+
+    public function __construct() {
+        $this->session = session();
+    }
+    public function dashboard()
     {
+
+        
+        if (!$this->session->has('isLogin')) {
+            return redirect()->to('login');
+        }
+
         $websiteModel = new WebsiteModel();
         $web = $websiteModel->getSettings();
 
@@ -22,13 +34,18 @@ class View extends BaseController
         $pembayaranModel = new PembayaranModel();
         $pembayaran = $pembayaranModel->getMetode();
 
+        $username = $this->session->get('username');
+        $userModel = new UserModel();
+        $user = $userModel->getDataUser($username);
+
         $data = [
             'web' => $web,
             'kategori' => $kategori,
             'produk' => $produk,
-            'pembayaran' => $pembayaran
+            'pembayaran' => $pembayaran,
+            'user' => $user
         ];
 
-        return view('index', $data);
+        return view('user/dashboard', $data);
     }
 }

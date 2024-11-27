@@ -67,7 +67,7 @@
 </style>
 
 <div class="main">
-    <div class="container mx-auto mt-8 px-4">
+    <!-- <div class="container mx-auto mt-8 px-4">
         <div class="relative">
             <button class="nav-button prev" id="prev-button">&#10094;</button>
             <button class="nav-button next" id="next-button">&#10095;</button>
@@ -87,7 +87,7 @@
                 <button class="dot" data-slide="1"></button>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="container mx-auto mt-8 px-4">
         <h2 class="text-xl font-semibold mb-4">Produk Terlaris</h2>

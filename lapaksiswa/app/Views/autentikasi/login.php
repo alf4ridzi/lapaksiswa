@@ -7,6 +7,10 @@
         align-items: center;
         justify-content: center;
         min-height: 100vh;
+        background-image: url('assets/background/page.png');
+        background-size: 70%;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 
     .login-box {
