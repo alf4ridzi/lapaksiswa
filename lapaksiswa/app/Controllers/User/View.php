@@ -19,6 +19,7 @@ class View extends BaseController
 
         
         if (!$this->session->has('isLogin')) {
+            $this->session->setFlashdata('error', 'Anda harus login terlebih dahulu!');
             return redirect()->to('login');
         }
 

@@ -118,6 +118,9 @@
                     <i class="fa-regular fa-bell text-black text-xl"></i>
                     <!-- <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">5</span> -->
                 </a>
+                <a href="/chat" class="relative">
+                    <i class="fa-regular fa-envelope text-black text-xl"></i>
+                </a>
 
                 <div class="flex items-center space-x-3 md:mt-0">
                     <?php if (!session()->get('isLogin')): ?>
@@ -201,7 +204,7 @@
 
             <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
 
-            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">c 2024 <a href="#"
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">&copy; 2024 <a href="#"
                     class="hover:underline">Lapak Siswa</a>. All Rights Reserved.</span>
         </div>
     </footer>
