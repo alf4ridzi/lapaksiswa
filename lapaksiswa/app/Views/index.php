@@ -72,7 +72,7 @@
         <?php if (!empty($produk)): ?>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <?php foreach ($terlaris as $p): ?>
-                    <a href="<?= esc($p['username']) ?>/<?= esc($p['produk_slug']) ?>"
+                    <a href="produk/<?= esc($p['produk_slug']) ?>"
                         class="block bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                         <div>
                             <img src="<?= esc($p['foto']) ?>" alt="<?= esc($p['nama']) ?> Foto"
