@@ -33,4 +33,30 @@ class ProdukModel extends Model
         return $this->findAll();
     }
 
+    public function getTerlaris() {
+        $max = 8;
+        $data = $this->findAll();
+
+        usort($data, function($a, $b) {
+            return $b['terjual'] - $a['terjual'];
+        });
+
+        $terlaris =  array_slice($data, 0, $max);
+        return $terlaris;
+    }
+
+    public function getTerbaru() {
+
+    }
+
+    public function getRekomendasi() {
+
+    }
+
+    public function getKategori(string $kategori) {
+        $kategori = strtolower($kategori);
+        
+        $data = $this->like('kategori', $kategori)->findAll();
+        return $data;
+    }
 }

@@ -67,33 +67,11 @@
 </style>
 
 <div class="main">
-    <!-- <div class="container mx-auto mt-8 px-4">
-        <div class="relative">
-            <button class="nav-button prev" id="prev-button">&#10094;</button>
-            <button class="nav-button next" id="next-button">&#10095;</button>
-
-            <div id="banner-slider" class="relative">
-                <div class="slide active">
-                    <img src="https://kumostoreindonesia.com/public/img/banner/kumostore_bannerr.webp" alt="Banner 1"
-                        class="w-full h-64 object-cover">
-                </div>
-                <div class="slide">
-                    <img src="https://kumostoreindonesia.com/public/img/banner/kumo%20store%20banner%20topup.webp"
-                        alt="Banner 2" class="w-full h-64 object-cover">
-                </div>
-            </div>
-            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                <button class="dot" data-slide="0"></button>
-                <button class="dot" data-slide="1"></button>
-            </div>
-        </div>
-    </div> -->
-
-    <div class="container mx-auto mt-8 px-4">
-        <h2 class="text-xl font-semibold mb-4">Produk Terlaris</h2>
+    <div class="product container mx-auto mt-8 px-4">
+        <h2 class="text-xl font-semibold mb-4">🔥 Produk Terlaris</h2>
         <?php if (!empty($produk)): ?>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <?php foreach ($produk as $p): ?>
+                <?php foreach ($terlaris as $p): ?>
                     <a href="<?= esc($p['username']) ?>/<?= esc($p['produk_slug']) ?>"
                         class="block bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                         <div>
@@ -106,7 +84,9 @@
                                     <?= number_format($p['harga'], 2, ',', '.') ?>
                                 </p>
                                 <p class="text-sm font-semibold"><?= esc($p['nama_toko']) ?></p>
-                                <p class="text-sm">⭐ 5.0 | <?= esc($p['terjual']) ?> Terjual</p>
+                                <p class="text-sm">⭐ <?= htmlspecialchars(sprintf("%.1f", $p['rating'])) ?> |
+                                    <?= esc($p['terjual']) ?> Terjual
+                                </p>
                             </div>
                         </div>
                     </a>
@@ -119,6 +99,7 @@
 </div>
 
 <script>
+    
     document.addEventListener('DOMContentLoaded', () => {
         const slider = document.getElementById('banner-slider');
         const slides = slider.querySelectorAll('.slide');
