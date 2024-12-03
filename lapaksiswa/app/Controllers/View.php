@@ -34,7 +34,8 @@ class View extends BaseController
         return view('index', $data);
     }
 
-    public function kategori($kategori_pencarian) {
+    public function kategori($kategori_pencarian)
+    {
         $produkModel = new ProdukModel();
         $produk = $produkModel->getKategori($kategori_pencarian);
 
@@ -58,10 +59,11 @@ class View extends BaseController
         return view('kategori', $data);
     }
 
-    public function search($keyword) {
+    public function search($keyword)
+    {
         $produkModel = new ProdukModel();
         $produk = $produkModel->like('nama', $keyword)
-        ->orLike('kategori', $keyword)->findAll();
+            ->orLike('kategori', $keyword)->findAll();
 
         $websiteModel = new WebsiteModel();
         $web = $websiteModel->getSettings();
@@ -83,10 +85,11 @@ class View extends BaseController
         return view('search', $data);
     }
 
-    public function produk($slug) {
+    public function produk($slug)
+    {
         $produkModel = new ProdukModel();
         $produk = $produkModel->where('produk_slug', $slug)->first();
-        
+
         $websiteModel = new WebsiteModel();
         $web = $websiteModel->getSettings();
 
@@ -96,11 +99,21 @@ class View extends BaseController
         $pembayaranModel = new PembayaranModel();
         $pembayaran = $pembayaranModel->getMetode();
 
+        if (!$produk) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $relatedProduk = $produkModel->where('nama', $produk['nama'])
+            ->where('kategori', $produk['kategori'])
+            ->where('nama !=', $produk['nama'])->findAll();
+
+
         $data = [
             'web' => $web,
             'kategori' => $kategori,
             'produk' => $produk,
             'pembayaran' => $pembayaran,
+            'related' => $relatedProduk
         ];
 
         return view('produk', $data);

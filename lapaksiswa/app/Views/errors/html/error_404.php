@@ -1,84 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="utf-8">
-    <title><?= lang('Errors.pageNotFound') ?></title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Halaman Tidak Ditemukan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        div.logo {
-            height: 200px;
-            width: 155px;
-            display: inline-block;
-            opacity: 0.08;
-            position: absolute;
-            top: 2rem;
-            left: 50%;
-            margin-left: -73px;
-        }
-        body {
-            height: 100%;
-            background: #fafafa;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            color: #777;
-            font-weight: 300;
-        }
-        h1 {
-            font-weight: lighter;
-            letter-spacing: normal;
-            font-size: 3rem;
-            margin-top: 0;
-            margin-bottom: 0;
-            color: #222;
-        }
-        .wrap {
-            max-width: 1024px;
-            margin: 5rem auto;
-            padding: 2rem;
-            background: #fff;
+        .error-container {
             text-align: center;
-            border: 1px solid #efefef;
-            border-radius: 0.5rem;
-            position: relative;
+            padding: 5rem 1rem;
+            background-color: #f8f9fa;
         }
-        pre {
-            white-space: normal;
-            margin-top: 1.5rem;
+        .error-title {
+            font-size: 10rem;
+            color: #dc3545;
         }
-        code {
-            background: #fafafa;
-            border: 1px solid #efefef;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            display: block;
+        .error-message {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
-        p {
-            margin-top: 1.5rem;
-        }
-        .footer {
-            margin-top: 2rem;
-            border-top: 1px solid #efefef;
-            padding: 1em 2em 0 2em;
-            font-size: 85%;
-            color: #999;
-        }
-        a:active,
-        a:link,
-        a:visited {
-            color: #dd4814;
+        .back-btn {
+            display: inline-block;
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body>
-    <div class="wrap">
-        <h1>404</h1>
-
-        <p>
-            <?php if (ENVIRONMENT !== 'production') : ?>
-                <?= nl2br(esc($message)) ?>
-            <?php else : ?>
-                <?= lang('Errors.sorryCannotFind') ?>
-            <?php endif; ?>
-        </p>
+    <div class="container">
+        <div class="error-container">
+            <h1 class="error-title">404</h1>
+            <p class="error-message">Ups! Halaman yang Anda cari tidak ditemukan.</p>
+            <p>Halaman ini mungkin telah dihapus, dipindahkan, atau tidak tersedia.</p>
+            <a href="/" class="btn btn-primary back-btn">
+                <i class="fas fa-home"></i> Kembali ke Beranda
+            </a>
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
