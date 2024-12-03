@@ -94,9 +94,11 @@
                         </div>
                     </div>
 
-                    <div class="mb-6">
-                        <p class="text-lg font-bold text-red-500">Subtotal: Rp12.000</p>
+                    <div class="mb-6 flex items-center">
+                        <p class="text-lg font-bold text-gray-500 mr-2">Subtotal:</p>
+                        <p class="text-lg font-bold text-black mr-2">Rp <?= number_format($produk['harga'], 0, ',', '.');  ?></p>
                     </div>
+
 
                     <div class="flex flex-col gap-4">
                         <button class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600">
@@ -159,10 +161,10 @@
         let quantityInput = parseInt(this.value, 10);
 
         if (quantityInput > stok) {
-            this.value = stok; 
+            this.value = stok;
         }
     });
-    
+
     function validateInput(input) {
         if (parseInt(input.value) < 1) {
             input.value = 1;
