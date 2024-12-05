@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->group('', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('/', 'View::index');
     $routes->get('kategori/(:any)', 'View::kategori/$1');
-    $routes->get('search/(:any)', 'View::search/$1');
+    $routes->get('search', 'View::search');
     $routes->get('produk/(:any)', 'View::produk/$1');
 });
 

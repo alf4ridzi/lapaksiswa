@@ -45,7 +45,7 @@
                             </h2>
                             <p class="text-sm font-semibold mb-2">
                                 <span class="text-gray-500 font-bold">
-                                    <i class="fa-solid fa-bag-shopping"></i> Sold:
+                                    <i class="fa-solid fa-bag-shopping"></i> Terjual:
                                     <?= htmlspecialchars($produk['terjual']); ?>
                                 </span>
                                 <span class="text-yellow-400 ml-4">
@@ -60,7 +60,9 @@
                             <div class="mb-6">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Spesifikasi</h3>
                                 <ul class="list-disc pl-5 text-gray-600">
+                                    <li>Kondisi : <?= htmlspecialchars($produk['kondisi'])?></li>
                                     <li>Unit: <?= htmlspecialchars($produk['unit']); ?></li>
+                                    <li>Varian: <?= htmlspecialchars($produk['varian']); ?></li>
                                     <li>Kategori: <?= htmlspecialchars($produk['kategori']); ?></li>
                                 </ul>
                             </div>

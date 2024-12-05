@@ -12,6 +12,8 @@
         <title>Hasil Pencarian : <?= $keyword ?></title>
     <?php elseif (strpos($_SERVER['REQUEST_URI'], 'kategori')): ?>
         <title>Kategori : <?= $nama_kategori ?></title>
+    <?php elseif (strpos($_SERVER['REQUEST_URI'], 'produk')): ?>
+        <title>Jual <?= htmlspecialchars($produk['nama']); ?> - <?= $web['web_title'] ?></title>
     <?php else: ?>
         <title><?= $web['web_title'] ?></title>
     <?php endif; ?>
@@ -184,7 +186,7 @@
                 </div>
 
                 <div class="hidden sm:block w-full relative">
-                    <input type="text" id="searchInput" placeholder="Cari Produk Yang Kamu Inginkan Disini!"
+                    <input type="text" id="searchInput" value="<?= isset($keyword) ? htmlspecialchars($keyword) : '' ?>" placeholder="Cari Produk Yang Kamu Inginkan Disini!"
                         class="w-full px-4 py-2 pl-10 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300">
                     <button onclick="searchButtonHandle()" id="searchButton"
                         class="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -322,8 +324,7 @@
             };
 
             localStorage.setItem('searchValue', input)
-            // redirect 
-            window.location.href = '<?php echo base_url('/search/'); ?>' + encodeURIComponent(input);
+            window.location.href = '<?php echo base_url('/search?keyword='); ?>' + encodeURIComponent(input);
         };
 
         

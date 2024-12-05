@@ -59,11 +59,20 @@ class View extends BaseController
         return view('kategori', $data);
     }
 
-    public function search($keyword)
+    public function search()
     {
+
+        $keyword = $this->request->getGet('keyword') ? htmlspecialchars($this->request->getGet('keyword')) : '';
+        $kategoriFilter = $this->request->getGet('kategori') ? htmlspecialchars($this->request->getGet('kategori'), ENT_QUOTES, 'UTF-8') : null;
+        $hargaMin = $this->request->getGet('harga_min') ? htmlspecialchars($this->request->getGet('harga_min'), ENT_QUOTES, 'UTF-8') : 0;
+        $hargaMax = $this->request->getGet('harga_max') ? htmlspecialchars($this->request->getGet('harga_max'), ENT_QUOTES, 'UTF-8') : 0;
+        $kondisiFilter = $this->request->getGet('kondisi') ? htmlspecialchars($this->request->getGet('kondisi'), ENT_QUOTES, 'UTF-8') : null;
+        $urutan = $this->request->getGet('urutan') ? htmlspecialchars($this->request->getGet('urutan'), ENT_QUOTES, 'UTF-8') : null;
+
         $produkModel = new ProdukModel();
+        $produk = $produkModel->select('*');
         $produk = $produkModel->like('nama', $keyword)
-            ->orLike('kategori', $keyword)->findAll();
+            ->orLike('kategori', $keyword);
 
         $websiteModel = new WebsiteModel();
         $web = $websiteModel->getSettings();
@@ -74,12 +83,27 @@ class View extends BaseController
         $pembayaranModel = new PembayaranModel();
         $pembayaran = $pembayaranModel->getMetode();
 
+        $kategoriLike = $kategoriModel->like('kategori', $keyword)->findAll();
+
+        if ($kategoriFilter) {
+            $produk = $produk->like('nama', $keyword)
+                ->orLike('kategori', $kategoriFilter);
+        }
+
+        if ($hargaMin > 0 && $hargaMax > $hargaMin) {
+            $produk = $produk->where('harga >=', $hargaMin)
+                ->where('harga <=', $hargaMax);
+        }
+
+        $produk = $produk->findAll();
+
         $data = [
             'web' => $web,
             'kategori' => $kategori,
             'produk' => $produk,
             'pembayaran' => $pembayaran,
-            'keyword' => $keyword
+            'keyword' => $keyword,
+            'kategoriLike' => $kategoriLike
         ];
 
         return view('search', $data);
