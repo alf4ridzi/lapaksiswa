@@ -18,7 +18,7 @@
     <div class="flex-grow">
         <?php if (!empty($produk)): ?>
             <nav class="text-gray-600 mb-4 text-sm sm:text-base">
-                <a href="/" class="hover:text-blue-500">Home</a>
+                <a href="/" class="hover:text-blue-500">Beranda</a>
                 <span>&gt;</span>
                 <a href="<?= $produk['username'] ?>" class="hover:text-blue-500"><?= $produk['nama_toko'] ?></a>
                 <span>&gt;</span>
@@ -96,7 +96,7 @@
 
                     <div class="mb-6 flex items-center">
                         <p class="text-lg font-bold text-gray-500 mr-2">Subtotal:</p>
-                        <p class="text-lg font-bold text-black mr-2">Rp <?= number_format($produk['harga'], 0, ',', '.');  ?></p>
+                        <p id="subtotal" class="text-lg font-bold text-black mr-2">Rp <?= number_format($produk['harga'], 0, ',', '.');  ?></p>
                     </div>
 
 
@@ -173,20 +173,30 @@
 
     document.getElementById('minus_stok').addEventListener('click', function () {
         let quantityInput = document.getElementById('quantity');
-        if (parseInt(quantityInput.value) > 1) {
-            quantityInput.value = parseInt(quantityInput.value) - 1;
+        let subtotal = document.getElementById('subtotal');
+        const price = <?= $produk['harga']; ?>;
+
+        let currentQuantity = parseInt(quantityInput.value);
+        if (currentQuantity > 1) {
+            quantityInput.value = currentQuantity - 1;
+            let subtotalNew = price * (currentQuantity - 1);
+            subtotal.innerText = "Rp " + subtotalNew.toLocaleString();
         }
     });
 
     document.getElementById('tambah_stok').addEventListener('click', function () {
         let quantityInput = document.getElementById('quantity');
-        let currentQuantity = parseInt(quantityInput.value);
+        let subtotal = document.getElementById('subtotal');
+        const price = <?= $produk['harga']; ?>;
+        const maxStock = <?= $produk['stok']; ?>;
 
-        if (currentQuantity < <?= $produk['stok']; ?>) {
+        let currentQuantity = parseInt(quantityInput.value);
+        if (currentQuantity < maxStock) {
             quantityInput.value = currentQuantity + 1;
+            let subtotalNew = price * (currentQuantity + 1);
+            subtotal.innerText = "Rp " + subtotalNew.toLocaleString();
         }
     });
-
 </script>
 
 <?= $this->endSection(); ?>
