@@ -4,23 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
     <?php if (strpos($_SERVER['REQUEST_URI'], 'login')): ?>
         <title>Login - <?= $web['web_title'] ?></title>
+        <meta name="description" content="<?= $web['web_description'] ?>">
+        <meta name="keywords" content="<?= $web['web_keywords'] ?>">
     <?php elseif (strpos($_SERVER['REQUEST_URI'], 'register')): ?>
         <title>Register - <?= $web['web_title'] ?></title>
+        <meta name="description" content="<?= $web['web_description'] ?>">
+        <meta name="keywords" content="<?= $web['web_keywords'] ?>">
     <?php elseif (strpos($_SERVER['REQUEST_URI'], 'search')): ?>
         <title>Hasil Pencarian : <?= $keyword ?></title>
+        <meta name="description" content="Pencarian Produk <?= $keyword ?>">
     <?php elseif (strpos($_SERVER['REQUEST_URI'], 'kategori')): ?>
         <title>Kategori : <?= $nama_kategori ?></title>
+        <meta name="description" content="Jual Produk <?= $nama_kategori ?>">
     <?php elseif (strpos($_SERVER['REQUEST_URI'], 'produk')): ?>
         <title>Jual <?= htmlspecialchars($produk['nama']); ?> - <?= $web['web_title'] ?></title>
+        <meta name="description" content="<?= htmlspecialchars($produk['nama']) ?> - <?= htmlspecialchars($produk['deskripsi']) ?>">
+        <meta name="keywords" content="<?= htmlspecialchars($produk['nama']) ?>">
     <?php else: ?>
         <title><?= $web['web_title'] ?></title>
-    <?php endif; ?>
-    <base href="/">
-    <link rel="canonical" href="<?= 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>" />
     <meta name="description" content="<?= $web['web_description'] ?>">
     <meta name="keywords" content="<?= $web['web_keywords'] ?>">
+    <?php endif; ?>
+    <link rel="canonical" href="<?= 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>" />
     <meta name="author" content="<?= $web['web_author'] ?>">
     <link rel="icon" type="image/x-icon" href="<?= $web['web_logo'] ?>">
     <link rel="stylesheet" href="/css/styles.css" type="text/css">
@@ -85,7 +93,7 @@
     }
 </style>
 
-<body class="flex flex-col min-h-screen">
+<nav class="flex flex-col min-h-screen">
     <nav class="bg-white-500 py-4">
         <div class="container mx-auto flex flex-wrap items-center justify-between">
             <div class="flex items-center space-x-3 ml-4">
@@ -347,7 +355,7 @@
 
 
     </script>
-</body>
+</nav>
 
 
 

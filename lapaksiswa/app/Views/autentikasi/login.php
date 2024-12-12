@@ -41,9 +41,6 @@
     .btn:hover {
         background-color: #2563EB;
     }
-
-    
-
 </style>
 
 <div class="login-container">
@@ -58,7 +55,7 @@
                 <?= session()->get('sukses') ?>
             </div>
         <?php endif; ?>
-        
+
         <form method="POST" action="auth/login">
             <div class="mb-4">
                 <label for="login" class="block text-sm font-semibold">Username/Email</label>
@@ -68,11 +65,15 @@
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-sm font-semibold">Password</label>
-                <input type="password" id="password" name="password"
-                    class="input-field px-4 py-2 border border-gray-300 rounded-md w-full"
-                    placeholder="Masukkan Password" required>
-                    
+                <div class="relative">
+                    <input type="password" id="password" name="password"
+                        class="input-field px-4 py-2 border border-gray-300 rounded-md w-full pr-10"
+                        placeholder="Masukkan Password" required>
+                    <i class="fa-solid fa-eye absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                        id="togglePassword"></i>
+                </div>
             </div>
+
             <div class="mb-4 flex items-center">
                 <input type="checkbox" id="remember" name="remember" class="mr-2">
                 <label for="remember" class="text-sm">Remember me</label>
@@ -85,4 +86,15 @@
     </div>
 </div>
 
+<script>
+    document.getElementById("togglePassword").addEventListener("click", function() {
+    const passwordField = document.getElementById("password");
+    const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+    passwordField.setAttribute("type", type);
+    
+    this.classList.toggle("fa-eye");
+    this.classList.toggle("fa-eye-slash");
+});
+
+</script>
 <?= $this->endSection() ?>

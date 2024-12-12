@@ -102,7 +102,7 @@ class Autentikasi extends BaseController
             return redirect()->to('seller');
         }
 
-        return redirect()->to('user');
+        return redirect()->to('/');
 
     }
 
